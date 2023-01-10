@@ -68,25 +68,34 @@ signed main () {
         if (str[i] == '#') b[++n] = i;
     FOR(i, 1, n) cin >> s[i], sort(All(s[i]));
     cin >> x;
-    pref[1] = 1;
+    pref[1] = s[1].length();
     FOR(i, 2, n) {
         z = i;
-        if (pref[i - 1] <= 1E19 / s[i].length())
+        if (pref[i - 1] <= 5E18 / s[i].length())
             pref[i] = pref[i - 1] * s[i].length();
         else break;
     }
-    k = 1;
     if (!pref[z]) z--;
-    while (k <= n && pref[k] > 0) {
-        v = 0;
-        while (x > pref[z] / pref[k]) {
-            x -= pref[z] / pref[k];
-            v++;
+    k = 0;
+    FOR(i, 0, str.length() - 1) {
+        if (str[i] != '#') {
+            cout << str[i];
+            continue;
         }
-        str[b[k]] = s[k][v];
-        k++;
+        ++k;
+        FOR(j, 0, s[k].length() - 1) {
+            if (k > z) {
+                cout << s[k][j];
+                break;
+            }
+            else {
+                if (x > pref[z] / pref[k]) x -= pref[z] / pref[k];
+                else {
+                    cout << s[k][j];
+                    break;
+                }
+            }
+        }
     }
-    FOR(i, k, n) str[b[i]] = s[i][0];
-    cout << str;
     return 0;
 }

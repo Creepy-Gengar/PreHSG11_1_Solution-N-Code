@@ -54,7 +54,7 @@
 /*______________________________________________________________________________________*/
 /*                      -> END OF TEMPLATE - TIME FOR THE MAIN CODE <-                  */
 string s[1002], str;
-ull x, n(0), b[1002], k, v, z, pref[1002];
+ll x, n(0), b[1002], k, v, z, pref[1002];
 signed main () {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
@@ -68,14 +68,12 @@ signed main () {
         if (str[i] == '#') b[++n] = i;
     FOR(i, 1, n) cin >> s[i], sort(All(s[i]));
     cin >> x;
-    pref[1] = s[1].length();
-    FOR(i, 2, n) {
+    pref[0] = 1;
+    FOR(i, 1, n) {
+        pref[i] = pref[i - 1] * s[i].length();
         z = i;
-        if (pref[i - 1] <= 3E20 / s[i].length())
-            pref[i] = pref[i - 1] * s[i].length();
-        else break;
+        if (pref[i] > x) break;
     }
-    if (!pref[z]) z--;
     k = 0;
     FOR(i, 0, str.length() - 1) {
         if (str[i] != '#') {

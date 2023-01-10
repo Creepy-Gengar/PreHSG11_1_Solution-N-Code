@@ -2,7 +2,7 @@
 /*|    Problem Name: [BPOINTS]                                                         |*/
 /*|    Coder: toquangnhattink5                                                         |*/
 /*|    Link of Problem: https://oj.vnoi.info/problem/hoclentop_prehsg11_1_b2           |*/
-/*|    Created on January 9th, 2023.                                                   |*/
+/*|    Created on January 10th, 2023.                                                  |*/
 /*______________________________________________________________________________________*/
 /*|*/ #include <bits/stdc++.h>                                                       /*|*/
 /*|*/ using namespace std;                                                           /*|*/
@@ -53,9 +53,9 @@
 /*|*/ }                                                                              /*|*/
 /*______________________________________________________________________________________*/
 /*                      -> END OF TEMPLATE - TIME FOR THE MAIN CODE <-                  */
-const ll X = 5E6 + 56;
-ll m, n, a[X], b[X], T(0);
-stack <ll> st;
+const int X = 5E6 + 56;
+int m, n, a[X], b[X], z(0);
+ll T(0);
 signed main () {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
@@ -66,11 +66,10 @@ signed main () {
     }
     cin >> n >> m;
     FOR(i, 1, n) cin >> a[i];
-    FOR(j, 1, m) cin >> b[j], st.push(b[j]);
-    REV(i, n, 1) {
-        while (!st.empty() && a[i] <= st.top()) st.pop();
-        if (st.empty()) break;
-        T += st.size();
+    FOR(j, 1, m) cin >> b[j];
+    FOR(i, 1, n) {
+        while (z < m && b[z + 1] < a[i]) z++;
+        T += 1LL * z;
     }
     cout << T;
     return 0;
